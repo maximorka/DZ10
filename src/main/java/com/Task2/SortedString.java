@@ -1,6 +1,7 @@
 package com.Task2;
 
 import com.GeneratorPerson;
+import com.Person;
 
 
 import java.util.List;
@@ -11,18 +12,17 @@ public class SortedString {
     // Возвращает список этих строк в верхнем регистре и отсортированные по убыванию (от Z до А).
     public List<String> sort(List<String> stringsNeedToSort){
 
-        List<String> collect = stringsNeedToSort.stream()
-                .map(it -> it.toUpperCase())
+        return stringsNeedToSort.stream()
+                .map(String::toUpperCase)
                 .sorted(((o1, o2) -> o2.compareTo(o1)))
                 .collect(Collectors.toList());
-        return collect;
 
     }
 
     public static void main(String[] args) {
         GeneratorPerson person = new GeneratorPerson();
         List<String> names = person.generatPerson(100).stream()
-                .map(it -> it.getName())
+                .map(Person::getName)
                 .collect(Collectors.toList());
 
 

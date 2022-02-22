@@ -14,7 +14,7 @@ public class Task5 {
      */
 
     public static <T> Stream<T> zip(Stream<T> first, Stream<T> second){
-        List<T> res = new ArrayList<>();
+        List<T> res = new ArrayList<T>();
 
         Iterator<T> iteratorFirst = first.iterator();
         Iterator<T> iteratorSecond = second.iterator();

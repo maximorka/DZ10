@@ -13,13 +13,12 @@ public class RandomStream {
      */
 public Stream<Long> createMyStream(long seed, long a , long c, long m){
     myRandom = new MyRandom(seed,a,c, m);
-    Stream<Long> r = Stream.iterate(seed,(in)-> myRandom.rand());
-    return r;
+    return Stream.iterate(seed,(in)-> myRandom.rand());
 }
     public static void main(String[] args) {
         RandomStream randomStream = new RandomStream();
 
         randomStream.createMyStream(6,25214903917L,11, (long) Math.pow(2,48)).limit(10)
-                .forEach(x -> System.out.println(x));
+                .forEach(System.out::println);
     }
 }

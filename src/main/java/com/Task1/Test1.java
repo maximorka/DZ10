@@ -15,7 +15,7 @@ public class Test1 {
 //    Вернуть строку в виде: "1. Ivan, 3. Peter ...",
 //    с именами из списка, стоящими под нечетным индексом (1, 3 и т.д.).
 
-    public String changeListSecondMetod(List listName) {
+    public String changeListSecondMetod(List<String>  listName) {
 
         final int[] count = {0};
         StringBuilder stringBuilder = new StringBuilder();
@@ -24,29 +24,25 @@ public class Test1 {
                     count[0]++;
                     return count[0] + ". " + it;
                 })
-                .map((it) -> {
+                .peek((it) -> {
                     String[] peoples = ((String) it).split(". ");
                     if (Integer.parseInt(peoples[0]) % 2 == 1)
-                        stringBuilder.append(it + ", ");
-                    return it;
+                        stringBuilder.append(it).append(", ");
                 })
                 .collect(Collectors.toList());
 
         return stringBuilder.toString();
     }
 
-    public String changeList(List listName) {
-       String result =  IntStream.range(0, listName.size())
-                .mapToObj(idx -> (idx + 1) + ". " + listName.get(idx))
-                .filter((it) -> {
-                    String[] split = it.split(". ");
-                    if (Integer.parseInt(split[0]) % 2 == 1)
-                        return true;
-                    return false;
-                })
-                .collect(Collectors.joining(", "));
+    public String changeList(List<String> listName) {
 
-        return result;
+        return IntStream.range(0, listName.size())
+                 .mapToObj(idx -> (idx + 1) + ". " + listName.get(idx))
+                 .filter((it) -> {
+                     String[] split = it.split(". ");
+                     return Integer.parseInt(split[0]) % 2 == 1;
+                 })
+                 .collect(Collectors.joining(", "));
     }
 
 
@@ -55,7 +51,7 @@ public class Test1 {
         GeneratorPerson person = new GeneratorPerson();
 
         List<String> names = person.generatPerson(100).stream()
-                .map(it -> it.getName())
+                .map(Person::getName)
                 .collect(Collectors.toList());
 
 
